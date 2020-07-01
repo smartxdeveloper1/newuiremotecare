@@ -17,7 +17,10 @@ export class HeaderComponent{
         private service:BackendserviceService
         ) {
     }
-
+   ngOnInit(){
+   
+   }
+  
     public user() {
         var userInfo = JSON.parse(localStorage.getItem("userInfo"))
     

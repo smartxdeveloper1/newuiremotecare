@@ -1,6 +1,43 @@
+<style>
+    ul.tree li {
+    list-style-type: none;
+    position: relative;
+}
+
+ul.tree li ul {
+    display: none;
+}
+
+ul.tree li.open > ul {
+    display: block;
+}
+
+ul.tree li a {
+    color: black;
+    text-decoration: none;
+}
+
+ul.tree li a:before {
+    height: 1em;
+    padding:0 .1em;
+    font-size: .8em;
+    display: block;
+    position: absolute;
+    left: -1.3em;
+    top: .2em;
+}
+ul.tree li > a:not(:last-child):before {
+    content: '+';
+}
+
+ul.tree li.open > a:not(:last-child):before {
+    content: '-';
+}
+</style>
 
 
 <aside class="main-sidebar">
+
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="height: auto;">
         <!-- Sidebar user panel -->
@@ -33,67 +70,64 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
 
                 </a>
-               
+
             </li>
-            <li class="treeview">
-                <a style="cursor: pointer;">
+            
+            <li class="treeview" data-widget="tree">
+                <a *ngIf="!smart()" style="cursor: pointer;" [routerLink]="['/dashboard/view-user']">
                     <i class="fa fa-user-circle"></i>
                     <span>Users</span>
                     <span class="pull-right-container">
                        
                     </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li [routerLink]="['/dashboard/add-user']" style="cursor: pointer;"><a><i class="fa fa-user-plus"></i>Add users</a></li>
-                    <li [routerLink]="['/dashboard/view-user']" style="cursor: pointer;"><a><i class="fa fa-table"></i> View Users</a></li>
-                    
-                </ul>
+               
+               
             </li>
-            <!-- <li><a style="cursor: pointer;" (click)="redirectToAbout()"><i class="fa fa-book"></i> <span>Devices</span></a></li> -->
-            <li class="treeview">
-                <a style="cursor: pointer;">
-                    <i class="fa fa-th"></i>
+           
+            <!-- <li><a style="cursor: pointer;" [routerLink]="['/dashboard/view-user']"><i class="fa fa-user-circle">
+                        <span>Users</span></a></li> -->
+            <li class="treeview" data-widget="tree">
+                <a style="cursor: pointer;" [routerLink]="['/dashboard/view-device']">
+                    <i class="fa fa-tablet" ></i>
                     <span>Devices</span>
                     <span class="pull-right-container">
-                       
+
                     </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li *ngIf="smart()" [routerLink]="['/dashboard/add-device']" style="cursor: pointer;"><a><i class="fa fa-user-plus"></i>Add Devices</a></li>
-                    <li [routerLink]="['/dashboard/view-device']" style="cursor: pointer;"><a><i class="fa fa-table"></i> View Devices</a></li>
-                    
-                </ul>
+               
             </li>
             <li class="treeview">
-                <a *ngIf="user()" style="cursor: pointer;">
+                <a *ngIf="showuser()" style="cursor: pointer;" [routerLink]="['/dashboard/view-org']">
                     <i class="fa fa-users"></i>
                     <span>Organisation Unit</span>
                     <span class="pull-right-container">
-                       
+
                     </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li [routerLink]="['/dashboard/add-org']" style="cursor: pointer;"><a><i class="fa fa-user-plus"></i>Add Organisation</a></li>
-                    <li [routerLink]="['/dashboard/view-org']" style="cursor: pointer;"><a><i class="fa fa-table"></i> View Organisation</a></li>
-                    
-                </ul>
+               
             </li>
             <li class="treeview">
-                <a *ngIf="user()" style="cursor: pointer;">
-                    <i class="fa fa-users"></i>
+                <a *ngIf="user()" style="cursor: pointer;"  [routerLink]="['/dashboard/view-allocate']">
+                    <i class="fa fa-exchange"></i>
                     <span>Allocate Device</span>
                     <span class="pull-right-container">
-                       
+
                     </span>
                 </a>
-                <ul class="treeview-menu">
-                    <li [routerLink]="['/dashboard/add-allocate']" style="cursor: pointer;"><a><i class="fa fa-user-plus"></i>Assign </a></li>
-                    <li [routerLink]="['/dashboard/view-allocate']" style="cursor: pointer;"><a><i class="fa fa-table"></i> View </a></li>
-                    
-                </ul>
+                
             </li>
-           
-            <li><a style="cursor: pointer;" *ngIf="showuser()"><i class="fa fa-book"></i> <span>Allocate Device</span></a></li>
+            <li class="treeview">
+                <a *ngIf="showuser()" style="cursor: pointer;" [routerLink]="['/dashboard/view-assign']">
+                    <i class="fa fa-exchange"></i>
+                    <span>Assign Device</span>
+                    <span class="pull-right-container">
+
+                    </span>
+                </a>
+               
+            </li>
+
             <li><a style="cursor: pointer;" (click)="logMeOut()"><i class="fa fa-th"></i> <span>Log-Out</span></a></li>
 
             
@@ -256,9 +290,10 @@
             <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
            
         </ul>
-    </section>
-    <!-- /.sidebar -->
+       </section>
+             /.sidebar -->
         </ul>
+    
     </section>
 </aside>
 <router-outlet></router-outlet>
